@@ -55,7 +55,6 @@ public class ParkourGenerator {
      */
     public void generateParkour(int[] startPosition, Direction startDirection, World world, int numSegments, List<ParkourSegment> segments) {
 
-        int[] currentPosition = startPosition;
         Direction currentDirection = startDirection;
 
         for(int i = 0; i < numSegments; ++i) {
@@ -72,7 +71,7 @@ public class ParkourGenerator {
 
             // Execute generate(), saving the endPosition
 
-            int[] endPosition = segment.generate(currentPosition, world);
+            int[] endPosition = segment.generate(startPosition, world);
 
             // Check if the direction changed
 
@@ -82,24 +81,24 @@ public class ParkourGenerator {
 
             switch (currentDirection) {
                 case NEGATIVE_X:
-                    currentPosition[0] = endPosition[0] - 1;
-                    currentPosition[1] = endPosition[1];
-                    currentPosition[2] = endPosition[2];
+                    startPosition[0] = endPosition[0] - 1;
+                    startPosition[1] = endPosition[1];
+                    startPosition[2] = endPosition[2];
                     break;
                 case NEGATIVE_Z:
-                    currentPosition[0] = endPosition[0];
-                    currentPosition[1] = endPosition[1];
-                    currentPosition[2] = endPosition[2] - 1;
+                    startPosition[0] = endPosition[0];
+                    startPosition[1] = endPosition[1];
+                    startPosition[2] = endPosition[2] - 1;
                     break;
                 case POSITIVE_X:
-                    currentPosition[0] = endPosition[0] + 1;
-                    currentPosition[1] = endPosition[1];
-                    currentPosition[2] = endPosition[2];
+                    startPosition[0] = endPosition[0] + 1;
+                    startPosition[1] = endPosition[1];
+                    startPosition[2] = endPosition[2];
                     break;
                 case POSITIVE_Z:
-                    currentPosition[0] = endPosition[0];
-                    currentPosition[1] = endPosition[1];
-                    currentPosition[2] = endPosition[2] + 1;
+                    startPosition[0] = endPosition[0];
+                    startPosition[1] = endPosition[1];
+                    startPosition[2] = endPosition[2] + 1;
                     break;
             }
 
