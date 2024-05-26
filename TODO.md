@@ -15,8 +15,10 @@
     - [x] `generateParkourCourse(int[] startPosition, Direction startDirection)`
 - [ ] Command Logic
   - [x] `/pg version`
-  - [ ] `/pg generate [number of segments]`
+  - [x] `/pg generate [number of segments]`
     - This should use the `ParkourGenerator` to generate a parkour course with the specified number of segments.
+  - [x] `/pg generate`
+    - This should use the `ParkourGenerator` to generate a parkour course with a random number of segments.
 - [ ] Create some `ParkourSegment`s
 - [ ] Write a `plugin.yml`
 - [ ] Write `README.md`

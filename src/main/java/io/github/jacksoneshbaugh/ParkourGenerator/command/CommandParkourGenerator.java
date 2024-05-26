@@ -1,10 +1,14 @@
 package io.github.jacksoneshbaugh.ParkourGenerator.command;
 
 import io.github.jacksoneshbaugh.ParkourGenerator.Main;
+import io.github.jacksoneshbaugh.ParkourGenerator.Util;
+import io.github.jacksoneshbaugh.ParkourGenerator.generator.Direction;
+import io.github.jacksoneshbaugh.ParkourGenerator.generator.ParkourGenerator;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 /**
  * Provides functionality for the "/pg" command and all of its subcommands.
@@ -17,12 +21,65 @@ public class CommandParkourGenerator implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
 
         if(args.length == 0) {
-            sender.sendMessage(ChatColor.RED + "Error: Improper command usage. \n/pg <version/generate>");
+            sender.sendMessage(ChatColor.AQUA + "[ParkourGenerator] " + ChatColor.RED + "Error: Improper command usage. \n/pg <[v]ersion/[g]enerate>");
             return true;
         }
 
-        if(args[0].equals("version")) {
+
+        // /pg [v]ersion
+        if(args[0].equals("version") || args[0].equals("v")) {
             sender.sendMessage(ChatColor.AQUA + "[ParkourGenerator] " + ChatColor.GREEN + "You're using ParkourGenerator version " + ChatColor.BOLD + ChatColor.GOLD + Main.VERSION);
+            return true;
+        }
+
+        // /pg [g]enerate
+        if(args[0].equals("generate") || args[0].equals("g")) {
+            if(!(sender instanceof Player player)) {
+                sender.sendMessage(ChatColor.AQUA + "[ParkourGenerator] " + ChatColor.RED + "Error: This command must be run by a player in-game.");
+                return true;
+            }
+
+            if(args.length > 1) {
+                // /pg [g]enerate [h]elp
+                if(args[1].equals("help") || args[1].equals("h")) {
+                    player.sendMessage(ChatColor.AQUA + "[ParkourGenerator] " + ChatColor.YELLOW + "/pg [g]enerate [number of segments/[h]elp]");
+                    player.sendMessage(ChatColor.AQUA + "[ParkourGenerator] " + ChatColor.YELLOW + "Running /pg generate or /pg g will generate a parkour of random length.");
+                    return true;
+                }
+
+                // /pg [g]enerate [number of segments]
+
+                int[] startPosition = {
+                        player.getLocation().getBlockX(),
+                        player.getLocation().getBlockY(),
+                        player.getLocation().getBlockZ()
+                };
+
+                int numSegments;
+
+                try {
+                    numSegments = Integer.parseInt(args[1]);
+                } catch(NumberFormatException e) {
+                    player.sendMessage(ChatColor.AQUA + "[ParkourGenerator] " + ChatColor.RED + "Error: You provided a non-integer number (\"" + ChatColor.UNDERLINE + ChatColor.YELLOW + args[1] + ChatColor.RED + "\"). Please try again.");
+                    return true;
+                }
+
+                ParkourGenerator.getInstance().generateParkour(startPosition, Util.getCardinalDirection(player), numSegments);
+                player.sendMessage(ChatColor.AQUA + "[ParkourGenerator] " + ChatColor.GREEN + "Successfully generated parkour.");
+
+                return true;
+            }
+
+            // /pg [g]enerate
+            int[] startPosition = {
+                    player.getLocation().getBlockX(),
+                    player.getLocation().getBlockY(),
+                    player.getLocation().getBlockZ()
+            };
+
+            ParkourGenerator.getInstance().generateParkour(startPosition, Util.getCardinalDirection(player));
+            player.sendMessage(ChatColor.AQUA + "[ParkourGenerator] " + ChatColor.GREEN + "Successfully generated parkour.");
+
             return true;
         }
 
