@@ -8,6 +8,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Provides functionality for the "/pg" command and all of its subcommands.
@@ -17,7 +18,12 @@ import org.bukkit.entity.Player;
 public class CommandParkourGenerator implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
+
+        if(!sender.hasPermission("parkourgenerator.command")) {
+            sender.sendMessage(ChatColor.RED + "You don't have permission to execute this command. Ask an administrator if you think this is an error.");
+            return true;
+        }
 
         if(args.length == 0) {
             sender.sendMessage(ChatColor.AQUA + "[ParkourGenerator] " + ChatColor.RED + "Error: Improper command usage. \n/pg <[v]ersion/[g]enerate>");
@@ -27,12 +33,24 @@ public class CommandParkourGenerator implements CommandExecutor {
 
         // /pg [v]ersion
         if(args[0].equals("version") || args[0].equals("v")) {
+
+            if(!sender.hasPermission("parkourgenerator.command.version")) {
+                sender.sendMessage(ChatColor.AQUA + "[ParkourGenerator] " + ChatColor.RED + "Error: You don't have permission to execute this command. Ask an administrator if you think this is an error.");
+                return true;
+            }
+
             sender.sendMessage(ChatColor.AQUA + "[ParkourGenerator] " + ChatColor.GREEN + "You're using ParkourGenerator version " + ChatColor.BOLD + ChatColor.GOLD + Main.VERSION);
             return true;
         }
 
         // /pg [g]enerate
         if(args[0].equals("generate") || args[0].equals("g")) {
+
+            if(!sender.hasPermission("parkourgenerator.command.generate")) {
+                sender.sendMessage(ChatColor.AQUA + "[ParkourGenerator] " + ChatColor.RED + "Error: You don't have permission to execute this command. Ask an administrator if you think this is an error.");
+                return true;
+            }
+
             if(!(sender instanceof Player player)) {
                 sender.sendMessage(ChatColor.AQUA + "[ParkourGenerator] " + ChatColor.RED + "Error: This command must be run by a player in-game.");
                 return true;
