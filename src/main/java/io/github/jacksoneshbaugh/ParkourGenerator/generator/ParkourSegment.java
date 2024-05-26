@@ -1,5 +1,7 @@
 package io.github.jacksoneshbaugh.ParkourGenerator.generator;
 
+import org.bukkit.World;
+
 /**
  * A segment of parkour used in the {@link ParkourGenerator} to generate a full course.
  *
@@ -7,6 +9,20 @@ package io.github.jacksoneshbaugh.ParkourGenerator.generator;
  * @version 05/25/2024
  */
 public abstract class ParkourSegment {
+
+    private final Direction startDirection, endDirection;
+
+    /**
+     * Instantiates a ParkourSegment with the given start and end directions. This is called in any segment's constructor
+     * using the {@code super()} keyword to set these parameters.
+     *
+     * @param startDirection the {@link Direction} that this segment starts facing.
+     * @param endDirection the {@link Direction} that this segment ends facing.
+     */
+    public ParkourSegment(Direction startDirection, Direction endDirection) {
+        this.startDirection = startDirection;
+        this.endDirection = endDirection;
+    }
 
     /**
      * Given the middle block of the first "row" of blocks ({@code start}), generates this segment of the parkour.
@@ -16,22 +32,27 @@ public abstract class ParkourSegment {
      * in the center, the returned int array should be adjusted so that the next segment starts in a "jumpable" place.
      *
      * @param start the middle block of the first row of blocks ({@code [x, y, z]})
+     * @param world the world to generate the segment in
      * @return the final middle block, again {@code [x, y, z]} (if this segment ends with a jump, this would be the final block of air of the jump)
      */
-    public abstract int[] generate(int[] start);
+    public abstract int[] generate(int[] start, World world);
 
     /**
      * Gets the direction that this segment begins facing.
      *
      * @return the direction that this segment begins facing
      */
-    public abstract Direction getStartDirection();
+    public Direction getStartDirection() {
+        return startDirection;
+    }
 
     /**
      * Gets the direction that this segment ends facing.
      *
      * @return the direction that this segment ends facing
      */
-    public abstract Direction getEndDirection();
+    public Direction getEndDirection() {
+        return endDirection;
+    }
 
 }

@@ -81,7 +81,7 @@ public class CommandParkourGenerator implements CommandExecutor {
                     return true;
                 }
 
-                ParkourGenerator.getInstance().generateParkour(startPosition, Util.getCardinalDirection(player), numSegments);
+                ParkourGenerator.getInstance().generateParkour(startPosition, Util.getCardinalDirection(player), player.getWorld(), numSegments);
                 player.sendMessage(ChatColor.AQUA + "[ParkourGenerator] " + ChatColor.GREEN + "Successfully generated parkour.");
 
                 return true;
@@ -94,7 +94,7 @@ public class CommandParkourGenerator implements CommandExecutor {
                     player.getLocation().getBlockZ()
             };
 
-            ParkourGenerator.getInstance().generateParkour(startPosition, Util.getCardinalDirection(player));
+            ParkourGenerator.getInstance().generateParkour(startPosition, Util.getCardinalDirection(player), player.getWorld());
             player.sendMessage(ChatColor.AQUA + "[ParkourGenerator] " + ChatColor.GREEN + "Successfully generated parkour.");
 
             return true;

@@ -1,5 +1,7 @@
 package io.github.jacksoneshbaugh.ParkourGenerator.generator;
 
+import org.bukkit.World;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,10 +48,11 @@ public class ParkourGenerator {
      *
      * @param startPosition an array that gives the start of the parkour course ({@code [x, y, z]})
      * @param startDirection the direction the parkour should start in
+     * @param world the world to generate the parkour in
      * @param numSegments the number of segments to generate
      * @param segments the {@link List} to pick segments from
      */
-    public void generateParkour(int[] startPosition, Direction startDirection, int numSegments, List<ParkourSegment> segments) {
+    public void generateParkour(int[] startPosition, Direction startDirection, World world, int numSegments, List<ParkourSegment> segments) {
 
         int[] currentPosition = startPosition;
         Direction currentDirection = startDirection;
@@ -68,7 +71,7 @@ public class ParkourGenerator {
 
             // Execute generate(), saving the endPosition
 
-            int[] endPosition = segment.generate(currentPosition);
+            int[] endPosition = segment.generate(currentPosition, world);
 
             // Check if the direction changed
 
@@ -109,10 +112,11 @@ public class ParkourGenerator {
      *
      * @param startPosition an array that gives the start of the parkour course ({@code [x, y, z]})
      * @param startDirection the direction the parkour should start in
+     * @param world the world to generate the parkour in
      * @param numSegments the number of segments to generate
      */
-    public void generateParkour(int[] startPosition, Direction startDirection, int numSegments) {
-        this.generateParkour(startPosition, startDirection, numSegments, segments);
+    public void generateParkour(int[] startPosition, Direction startDirection, World world, int numSegments) {
+        this.generateParkour(startPosition, startDirection, world, numSegments, segments);
     }
 
     /**
@@ -121,9 +125,10 @@ public class ParkourGenerator {
      *
      * @param startPosition an array that gives the start of the parkour course ({@code [x, y, z]})
      * @param startDirection the direction the parkour should start in
+     * @param world the world to generate the parkour in
      */
-    public void generateParkour(int[] startPosition, Direction startDirection) {
-        this.generateParkour(startPosition, startDirection, (int) ((Math.random() * (50 - 10)) + 10), segments);
+    public void generateParkour(int[] startPosition, Direction startDirection, World world) {
+        this.generateParkour(startPosition, startDirection, world, (int) ((Math.random() * (50 - 10)) + 10), segments);
     }
 
     /**
@@ -132,10 +137,11 @@ public class ParkourGenerator {
      *
      * @param startPosition an array that gives the start of the parkour course ({@code [x, y, z]})
      * @param startDirection the direction the parkour should start in
+     * @param world the world to generate the parkour in
      * @param segments the {@link List} to pick segments from
      */
-    public void generateParkour(int[] startPosition, Direction startDirection, List<ParkourSegment> segments) {
-        this.generateParkour(startPosition, startDirection, (int) ((Math.random() * (50 - 10)) + 10), segments);
+    public void generateParkour(int[] startPosition, Direction startDirection, World world, List<ParkourSegment> segments) {
+        this.generateParkour(startPosition, startDirection, world, (int) ((Math.random() * (50 - 10)) + 10), segments);
     }
 
 }
