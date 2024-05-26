@@ -132,7 +132,7 @@ public class ParkourGenerator {
     }
 
     /**
-     * Generates a parkour course, starting at the position given by {@code start}, with between 10–50 {@link ParkourSegment}s picked from the specifed {@code segments} {@link List}. This
+     * Generates a parkour course, starting at the position given by {@code start}, with between 10–50 {@link ParkourSegment}s picked from the specified {@code segments} {@link List}. This
      * is a destructive function and makes permanent changes to the world.
      *
      * @param startPosition an array that gives the start of the parkour course ({@code [x, y, z]})
