@@ -1,2 +1,22 @@
 # TODO
 
+- [x] Parkour Generation Logic
+  - [x] `ParkourSegment` class
+    - [x] `int[] generate(int[] start)`
+      - This should return the end position of the segment.
+    - [x] `Direction getStartDirection()`
+      - This should return the direction the player should be facing when they start the segment.
+    - [x] `Direction getEndDirection()`
+      - This should return the direction the player should be facing when they finish the segment. When startDirection and endDirection differ, a turn has occured.
+  - [x] `ParkourGenerator` class
+    - [x] `generateParkourCourse(int[] startPosition, Direction startDirection, int numberOfSegments, List<ParkourSegment> segments)`
+    - [x] `generateParkourCourse(int[] startPostion, Direction startDirection, int numberOfSegments)`
+    - [x] `generateParkourCourse(int[] startPosition, Direction startDirection, List<ParkourSegment> segments)`
+    - [x] `generateParkourCourse(int[] startPosition, Direction startDirection)`
+- [ ] Command Logic
+  - [x] `/pg version`
+  - [ ] `/pg generate [number of segments]`
+    - This should use the `ParkourGenerator` to generate a parkour course with the specified number of segments.
+- [ ] Create some `ParkourSegment`s
+- [ ] Write a `plugin.yml`
+- [ ] Write `README.md`

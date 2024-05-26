@@ -16,8 +16,22 @@ public abstract class ParkourSegment {
      * in the center, the returned int array should be adjusted so that the next segment starts in a "jumpable" place.
      *
      * @param start the middle block of the first row of blocks ({@code [x, y, z]})
-     * @return the final middle block, again ({@code [x, y, z]}) (if this segment ends with a jump, this would be the final block of air of the jump)
+     * @return the final middle block, again {@code [x, y, z]} (if this segment ends with a jump, this would be the final block of air of the jump)
      */
     public abstract int[] generate(int[] start);
+
+    /**
+     * Gets the direction that this segment begins facing.
+     *
+     * @return the direction that this segment begins facing
+     */
+    public abstract Direction getStartDirection();
+
+    /**
+     * Gets the direction that this segment ends facing.
+     *
+     * @return the direction that this segment ends facing
+     */
+    public abstract Direction getEndDirection();
 
 }
