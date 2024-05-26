@@ -2,6 +2,7 @@ package io.github.jacksoneshbaugh.ParkourGenerator;
 
 import io.github.jacksoneshbaugh.ParkourGenerator.command.CommandParkourGenerator;
 import org.bukkit.Bukkit;
+import org.bukkit.command.PluginCommand;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.annotation.command.Command;
@@ -9,6 +10,8 @@ import org.bukkit.plugin.java.annotation.permission.Permission;
 import org.bukkit.plugin.java.annotation.plugin.Description;
 import org.bukkit.plugin.java.annotation.plugin.Plugin;
 import org.bukkit.plugin.java.annotation.plugin.author.Author;
+
+import java.util.Optional;
 
 /**
  * The entry point for the ParkourGenerator Spigot plugin.
@@ -33,7 +36,7 @@ public class Main extends JavaPlugin {
         Bukkit.getServer().getLogger().info("Enabling ParkourGenerator version " + VERSION);
 
         // Register Commands
-        this.getCommand("parkourgenerator").setExecutor(new CommandParkourGenerator());
+        Optional.ofNullable(this.getCommand("parkourgenerator")).ifPresent(cmd -> cmd.setExecutor(new CommandParkourGenerator()));
     }
 
     @Override
