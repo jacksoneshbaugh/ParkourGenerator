@@ -1,8 +1,8 @@
 package io.github.jacksoneshbaugh.ParkourGenerator;
 
 import io.github.jacksoneshbaugh.ParkourGenerator.command.CommandParkourGenerator;
+import io.github.jacksoneshbaugh.ParkourGenerator.generator.segment.SegmentManager;
 import org.bukkit.Bukkit;
-import org.bukkit.command.PluginCommand;
 import org.bukkit.permissions.PermissionDefault;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.annotation.command.Command;
@@ -34,6 +34,9 @@ public class Main extends JavaPlugin {
     @Override
     public void onEnable() {
         Bukkit.getServer().getLogger().info("Enabling ParkourGenerator version " + VERSION);
+
+        // Register ParkourSegments
+        SegmentManager.registerSegments();
 
         // Register Commands
         Optional.ofNullable(this.getCommand("parkourgenerator")).ifPresent(cmd -> cmd.setExecutor(new CommandParkourGenerator()));

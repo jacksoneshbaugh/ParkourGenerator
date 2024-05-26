@@ -1,6 +1,7 @@
 package io.github.jacksoneshbaugh.ParkourGenerator.generator;
 
 import org.bukkit.World;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A segment of parkour used in the {@link ParkourGenerator} to generate a full course.
@@ -35,7 +36,7 @@ public abstract class ParkourSegment {
      * @param world the world to generate the segment in
      * @return the final middle block, again {@code [x, y, z]} (if this segment ends with a jump, this would be the final block of air of the jump)
      */
-    public abstract int[] generate(int[] start, World world);
+    public abstract int[] generate(@NotNull int[] start, @NotNull World world);
 
     /**
      * Gets the direction that this segment begins facing.

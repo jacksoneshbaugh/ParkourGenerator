@@ -33,8 +33,9 @@ public class ParkourGenerator {
 
     /**
      * Registers a {@link ParkourSegment} with the {@link ParkourGenerator}, thus allowing it to be randomly
-     * chosen when generating random parkour. Other plugins looking to register instances of {@link ParkourSegment}
-     * should do so in their {@code onEnable()} method.
+     * chosen when generating random parkour. Plugins looking to register instances of {@link ParkourSegment}
+     * should do so in their {@code onEnable()} method. It is wise to have a separate method which handles registration
+     * which you call in {@code onEnable()}.
      *
      * @param segment the {@link ParkourSegment} to register
      */
