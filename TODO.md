@@ -19,6 +19,7 @@
     - This should use the `ParkourGenerator` to generate a parkour course with the specified number of segments.
   - [x] `/pg generate`
     - This should use the `ParkourGenerator` to generate a parkour course with a random number of segments.
+- [x] Write a `plugin.yml`
+  - Done using `Plugin-Annotations`
 - [ ] Create some `ParkourSegment`s
-- [ ] Write a `plugin.yml`
 - [ ] Write `README.md`

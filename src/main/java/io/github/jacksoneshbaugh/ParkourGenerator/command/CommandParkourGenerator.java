@@ -2,7 +2,6 @@ package io.github.jacksoneshbaugh.ParkourGenerator.command;
 
 import io.github.jacksoneshbaugh.ParkourGenerator.Main;
 import io.github.jacksoneshbaugh.ParkourGenerator.Util;
-import io.github.jacksoneshbaugh.ParkourGenerator.generator.Direction;
 import io.github.jacksoneshbaugh.ParkourGenerator.generator.ParkourGenerator;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
